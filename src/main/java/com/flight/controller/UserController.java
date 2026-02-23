@@ -41,7 +41,7 @@ public class UserController {
 		}
 	}
 
-	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('client_admin')")
+//	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('client_admin')")
 	@PostMapping("/addUser")
 	public ResponseEntity<ApiResponse<List<SuccessMessage>>> saveUser(@Valid @RequestBody UserDto userDTO) {
 

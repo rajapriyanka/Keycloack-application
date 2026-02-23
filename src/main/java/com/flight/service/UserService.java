@@ -190,7 +190,7 @@ public class UserService {
 
 		kcUser.setCredentials(List.of(credential));
 
-		String realm = "FlightReservationSystem";
+		String realm = "Sample";
 
 		List<UserRepresentation> existing = keycloak.realm(realm).users().search(dto.getUsername(), true);
 

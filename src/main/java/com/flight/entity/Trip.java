@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "trip")
-public class Trip {
+public class Trip extends Auditable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
