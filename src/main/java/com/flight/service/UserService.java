@@ -150,6 +150,27 @@ public class UserService {
 	private void updatePassword(User user, String newPassword) {
 		user.setPassword(passwordEncoder.encode(newPassword));
 		userRepository.save(user);
+		updateKeycloakPassword(user.getUsername(), newPassword);
+	}
+
+	private void updateKeycloakPassword(String username, String newPassword) {
+
+		String realm = "Sample";
+
+		List<UserRepresentation> users = keycloak.realm(realm).users().search(username, true);
+
+		if (users.isEmpty()) {
+			throw new RuntimeException("User not found in Keycloak");
+		}
+
+		String kcUserId = users.get(0).getId();
+
+		CredentialRepresentation credential = new CredentialRepresentation();
+		credential.setType(CredentialRepresentation.PASSWORD);
+		credential.setValue(newPassword);
+		credential.setTemporary(false);
+
+		keycloak.realm(realm).users().get(kcUserId).resetPassword(credential);
 	}
 
 	public UserDto saveUser(UserDto dto) {
