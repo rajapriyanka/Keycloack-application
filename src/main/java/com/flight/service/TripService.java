@@ -7,12 +7,14 @@ import com.flight.entity.Trip;
 import com.flight.entity.User;
 import com.flight.repository.BookingRepository;
 import com.flight.repository.FlightRepository;
+import com.flight.repository.PasswordResetRepository;
 import com.flight.repository.TripRepository;
 import com.flight.repository.UserRepository;
 import com.flight.util.SeatClass;
 import com.flight.util.TripStatus;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -22,17 +24,26 @@ import java.util.stream.Collectors;
 @Service
 public class TripService {
 
-	@Autowired
+//	@Autowired
 	private TripRepository tripRepository;
 
-	@Autowired
+//	@Autowired
 	private FlightRepository flightRepository;
 
-	@Autowired
+//	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
+//	@Autowired
 	private BookingRepository bookingRepository;
+	
+	public TripService(UserRepository userRepository, BookingRepository bookingRepository,
+			FlightRepository flightRepository, TripRepository tripRepository) {
+		this.userRepository = userRepository;
+		this.tripRepository = tripRepository;
+		this.flightRepository = flightRepository;
+		this.bookingRepository = bookingRepository;
+	}
+
 
 	private TripDto toDto(Trip trip) {
 		return new TripDto(trip.getTripId(), trip.getFlight().getId(), trip.getFrom(), trip.getTo(),

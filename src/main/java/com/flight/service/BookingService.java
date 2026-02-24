@@ -1,5 +1,9 @@
 package com.flight.service;
 
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 import com.flight.dto.BookingResponseDto;
 import com.flight.entity.Booking;
 import com.flight.entity.Flight;
@@ -11,28 +15,32 @@ import com.flight.repository.TripRepository;
 import com.flight.repository.UserRepository;
 import com.flight.util.SeatClass;
 import com.flight.util.TripStatus;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.time.ZonedDateTime;
+import jakarta.transaction.Transactional;
 
 @Service
+//@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BookingService {
 
-	@Autowired
+//	@Autowired
 	private BookingRepository bookingRepository;
 
-	@Autowired
+//	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
+//	@Autowired
 	private TripRepository tripRepository;
 
-	@Autowired
+//	@Autowired
 	private FlightRepository flightRepository;
+
+	public BookingService(BookingRepository bookingRepository, UserRepository userRepository,
+			TripRepository tripRepository, FlightRepository flightRepository) {
+		this.bookingRepository = bookingRepository;
+		this.flightRepository = flightRepository;
+		this.tripRepository = tripRepository;
+		this.userRepository = userRepository;
+	}
 
 	private BookingResponseDto toDto(Booking booking) {
 		return new BookingResponseDto(booking.getBookingId(), booking.getUser().getUsername(),

@@ -12,7 +12,7 @@ public abstract class Auditable {
 
 	@CreatedBy
 	@Column(name = "created_by", updatable = false)
-	private Long createdBy;
+	private String createdBy;
 
 	@CreatedDate
 	@Column(name = "created_date", updatable = false)
@@ -20,25 +20,25 @@ public abstract class Auditable {
 
 	@LastModifiedBy
 	@Column(name = "last_modified_by")
-	private Long lastModifiedBy;
+	private String lastModifiedBy;
 
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
 	private LocalDateTime lastModifiedDate;
 
-	public Long getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(Long createdBy) {
+	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	public Long getLastModifiedBy() {
+	public String getLastModifiedBy() {
 		return lastModifiedBy;
 	}
 
-	public void setLastModifiedBy(Long lastModifiedBy) {
+	public void setLastModifiedBy(String lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 

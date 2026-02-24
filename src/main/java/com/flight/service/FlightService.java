@@ -3,7 +3,6 @@ package com.flight.service;
 import com.flight.dto.FlightDto;
 import com.flight.entity.Flight;
 import com.flight.repository.FlightRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.stream.Collectors;
 @Service
 public class FlightService {
 
-	@Autowired
 	private FlightRepository flightRepository;
+
+	public FlightService(FlightRepository flightRepository) {
+		this.flightRepository = flightRepository;
+	}
 
 	private FlightDto toDto(Flight flight) {
 		return new FlightDto(flight.getId(), flight.getFlightNo(), flight.getFlightName(),
