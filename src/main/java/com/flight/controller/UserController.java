@@ -7,12 +7,10 @@ import com.flight.util.ApiError;
 import com.flight.util.ApiResponse;
 import com.flight.util.ErrorCode;
 import com.flight.util.SuccessMessage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.validation.Valid;
 import java.util.List;
 
@@ -20,8 +18,12 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-	@Autowired
+//	@Autowired
 	private UserService userService;
+
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@PreAuthorize("hasAnyRole('ADMIN','USER')")
 	@PostMapping("/change-password")
@@ -55,7 +57,7 @@ public class UserController {
 		return ResponseEntity.status(isCreate ? HttpStatus.OK : HttpStatus.OK).body(ApiResponse.success(messages));
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('client_admin')")
 	@GetMapping("/fetchUser")
 	public ResponseEntity<ApiResponse<List<UserDto>>> getAllUsers() {
 		List<UserDto> users = userService.getAllUsers();

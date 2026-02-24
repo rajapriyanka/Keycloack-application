@@ -125,11 +125,11 @@ public class UserDto {
 		this.wallet = wallet;
 	}
 
-//	public String getIsDeleted() {
-//		return isDeleted;
-//	}
-//
-//	public void setIsDeleted(String isDeleted) {
-//		this.isDeleted = isDeleted;
-//	}
+	@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", wallet=" + wallet + ", role="
+				+ role + "]";
+	}
+
 }

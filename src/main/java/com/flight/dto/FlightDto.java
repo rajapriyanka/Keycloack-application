@@ -26,7 +26,7 @@ public class FlightDto {
 
 	@PositiveOrZero
 	private int availableBusinessSeats;
-	
+
 	@Column(name = "is_deleted", length = 3, nullable = false)
 	private String isDeleted = "NO";
 
@@ -107,6 +107,14 @@ public class FlightDto {
 
 	public void setAvailableBusinessSeats(int availableBusinessSeats) {
 		this.availableBusinessSeats = availableBusinessSeats;
+	}
+
+	@Override
+	public String toString() {
+		return "FlightDto [id=" + id + ", flightNo=" + flightNo + ", flightName=" + flightName + ", totalEconomySeats="
+				+ totalEconomySeats + ", totalBusinessSeats=" + totalBusinessSeats + ", availableEconomySeats="
+				+ availableEconomySeats + ", availableBusinessSeats=" + availableBusinessSeats + ", isDeleted="
+				+ isDeleted + "]";
 	}
 
 }

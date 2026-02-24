@@ -147,4 +147,12 @@ public class TripDto {
 		this.actualArrivalTime = actualArrivalTime;
 	}
 
+	@Override
+	public String toString() {
+		return "TripDto [tripId=" + tripId + ", flightId=" + flightId + ", from=" + from + ", to=" + to
+				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", economyFare=" + economyFare
+				+ ", businessFare=" + businessFare + ", status=" + status + ", actualDepartureTime="
+				+ actualDepartureTime + ", actualArrivalTime=" + actualArrivalTime + "]";
+	}
+
 }
